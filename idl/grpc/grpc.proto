@@ -1,18 +1,11 @@
 syntax = "proto3";
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+service FortuneTeller {
+  rpc GetFortune (FortuneRequest) returns (FortuneResponse);
 }
 
-// The request message containing the user's name.
-message HelloRequest {
+message FortuneRequest {
   string name = 1;
-  enum personalityType {
-    A = 1;
-    B = 2;
-  }
   message Car {
     string make = 1;
     string model = 2;
@@ -30,7 +23,16 @@ message HelloRequest {
   map<string, int32> siblingAges = 7;
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message FortuneResponse {
+  enum Animal {
+    MONKEY = 0;
+    OWL = 1;
+    ANT = 2;
+    LIZARD = 3;
+    CAT = 4;
+  }
+
+  string fortune = 1;
+  repeated int32 luckyNumbers = 2;
+  Animal luckyAnimal = 3;
 }
