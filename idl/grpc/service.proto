@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+  enum personalityType {
+    A = 1;
+    B = 2;
+  }
+  message Car {
+    string make = 1;
+    string model = 2;
+    int32 year = 3;
+  }
+  // this field may be absent
+  Car optionalCar = 3;
+  oneof vehicleDescription {
+    string carNickname = 4;
+    int32 bikeFrameSizeCm = 5;
+  }
+
+  repeated int32 fingerLengths = 6;
+
+  map<string, int32> siblingAges = 7;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
