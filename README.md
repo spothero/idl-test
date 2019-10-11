@@ -50,3 +50,8 @@ https://github.com/spothero/idl-test
 * `protoc` - https://github.com/protocolbuffers/protobuf
 * `protoc-gen-go` - `go get github.com/golang/protobuf/protoc-gen-go` -
   https://developers.google.com/protocol-buffers/docs/reference/go-generated
+* `thrift` - https://thrift.apache.org/docs/install/ (`brew install thrift` on MacOS)
+
+## IDL Overviews and Guides
+
+* `thrift` - https://diwakergupta.github.io/thrift-missing-guide/
