@@ -1,15 +1,17 @@
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
+  repositories {
+    gradlePluginPortal()
 
-        maven {
-            url = uri(extra["nexusMavenUrl"] as String)
-        }
+    maven {
+      url = uri(extra["nexusMavenUrl"] as String)
     }
+  }
 }
 
-rootProject.name = "java-grpc-idl-test"
+rootProject.name = "grpc-java"
 
 include(
-  "single-module"
+  ":client",
+  ":model",
+  ":server"
 )

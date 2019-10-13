@@ -1,12 +1,8 @@
 import com.google.protobuf.gradle.*
 
 plugins {
-  application
+  java
   id("com.google.protobuf").version("0.8.8")
-}
-
-application {
-  mainClassName = "com.spothero.idltest.javagrpc.singlemodule.HelloWorldKt"
 }
 
 repositories {
