@@ -1,0 +1,47 @@
+syntax = "proto3";
+package grpc.v1;
+option go_package = "grpcv1";
+option java_multiple_files = true;
+option java_outer_classname = "GrpcProto";
+option java_package = "com.grpc.v1";
+option csharp_namespace = "Grpc.V1";
+option objc_class_prefix = "GXX";
+option php_namespace = "Grpc\\V1";
+
+service FortuneTellerAPI {
+  rpc GetFortune (GetFortuneRequest) returns (GetFortuneResponse);
+}
+
+message GetFortuneRequest {
+  string name = 1;
+  message Car {
+    string make = 1;
+    string model = 2;
+    int32 year = 3;
+  }
+  // this field may be absent
+  Car optional_car = 3;
+  oneof vehicle_description {
+    string car_nickname = 4;
+    int32 bike_frame_size_cm = 5;
+  }
+
+  repeated int32 finger_lengths = 6;
+
+  map<string, int32> sibling_ages = 7;
+}
+
+message GetFortuneResponse {
+  enum Animal {
+    ANIMAL_INVALID = 0;
+    ANIMAL_MONKEY = 1;
+    ANIMAL_OWL = 2;
+    ANIMAL_ANT = 3;
+    ANIMAL_LIZARD = 4;
+    ANIMAL_CAT = 5;
+  }
+
+  string fortune = 1;
+  repeated int32 lucky_numbers = 2;
+  Animal lucky_animal = 3;
+}
