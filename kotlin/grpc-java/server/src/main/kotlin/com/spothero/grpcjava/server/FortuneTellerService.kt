@@ -2,11 +2,19 @@ package com.spothero.grpcjava.server
 
 import com.grpc.v1.GetFortuneRequest
 import com.grpc.v1.GetFortuneResponse
+import kotlinx.coroutines.*
 import kotlin.random.Random
 
 class FortuneTellerService {
 
   val random = Random.Default
+
+  fun getFortuneAsync(getFortuneRequest: GetFortuneRequest): Deferred<GetFortuneResponse> {
+    return GlobalScope.async(Dispatchers.Default) {
+      delay(random.nextLong(500, 1000))
+      getFortune(getFortuneRequest)
+    }
+  }
 
   fun getFortune(getFortuneRequest: GetFortuneRequest): GetFortuneResponse {
     if (getFortuneRequest.hasOptionalCar()) {

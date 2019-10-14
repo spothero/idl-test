@@ -4,6 +4,9 @@ import com.grpc.v1.FortuneTellerAPIGrpc
 import com.grpc.v1.GetFortuneRequest
 import com.grpc.v1.GetFortuneResponse
 import io.grpc.stub.StreamObserver
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class FortuneTellerAPIImpl(val fortuneTellerService: FortuneTellerService)
   : FortuneTellerAPIGrpc.FortuneTellerAPIImplBase()
@@ -13,9 +16,10 @@ class FortuneTellerAPIImpl(val fortuneTellerService: FortuneTellerService)
     request: GetFortuneRequest,
     responseObserver: StreamObserver<GetFortuneResponse>
   ) {
-    println("Getting Fortune!")
-    val response = fortuneTellerService.getFortune(request)
-    responseObserver.onNext(response)
-    responseObserver.onCompleted()
+    GlobalScope.launch(Dispatchers.Default) {
+      val response = fortuneTellerService.getFortuneAsync(request).await()
+      responseObserver.onNext(response)
+      responseObserver.onCompleted()
+    }
   }
 }
