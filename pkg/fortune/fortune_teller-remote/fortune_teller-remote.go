@@ -14,7 +14,7 @@ import (
         "strconv"
         "strings"
         "github.com/apache/thrift/lib/go/thrift"
-        "github.com/spothero/idl-test/go/pkg/fortune"
+        "github.com/spothero/idl-test/pkg/fortune"
 )
 
 

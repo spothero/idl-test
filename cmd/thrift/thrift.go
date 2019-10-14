@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/spothero/idl-test/go/v2/pkg/fortune"
+	"github.com/spothero/idl-test/pkg/fortune"
 )
 
 func main() {

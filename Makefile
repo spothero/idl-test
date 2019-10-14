@@ -7,7 +7,7 @@ idl-codegen:
 
 .PHONY: go
 go:
-	$(MAKE) -C go
+	go build ./...
 
 .PHONY: clean
 clean:
