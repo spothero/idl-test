@@ -1,7 +1,7 @@
 java_out_dir = java-out gen-java
 grpc_dir = grpcv1
 thrift_dir = thrift
-go_out_dir = go-out gen-go
+go_out_dir = ../go/v2/pkg
 py_out_dir = gen-py
 out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
 
@@ -21,7 +21,7 @@ codegen: check grpc-codegen thrift-codegen
 thrift-codegen:
 	thrift --gen py ${thrift_dir}/*
 	thrift --gen java ${thrift_dir}/*
-	thrift --gen go ${thrift_dir}/*
+	thrift --gen go --out ${go_out_dir} ${thrift_dir}/*
 
 .PHONY: grpc-codegen
 grpc-codegen:

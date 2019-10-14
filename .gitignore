@@ -4,3 +4,5 @@ gen-go
 gen-java
 gen-py
 thrift-out
+go/v2/pkg/fortune
+go/v2/pkg/grpcv1
