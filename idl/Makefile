@@ -1,20 +1,31 @@
+java_out_dir = java-out gen-java
 grpc_dir = grpc
-grpc_src = ${grpc_dir}/grpc.proto
-go_out_dir = go-out
-go_grpc_artifact = ${go_out_dir}/grpc.pb.go
-out_dirs = ${go_out_dir}
+thrift_dir = thrift
+go_out_dir = go-out gen-go
+py_out_dir = gen-py
+out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
 
 .PHONY: all
-all: ${go_grpc_artifact}
+all: codegen
 
+.PHONY: check
 check:
-	@which protoc > /dev/null
+	@which prototool > /dev/null
 	@which protoc-gen-go > /dev/null
 	@echo 'All deps OK.'
 
-${go_grpc_artifact}: ${grpc_src}
-	mkdir -p ${go_out_dir}
-	protoc -I ${grpc_dir} $< --go_out=plugins=grpc:./${go_out_dir}
+.PHONY: codegen
+codegen: check grpc-codegen thrift-codegen
+
+.PHONY: thrift-codegen
+thrift-codegen:
+	thrift --gen py ${thrift_dir}/*
+	thrift --gen java ${thrift_dir}/*
+	thrift --gen go ${thrift_dir}/*
+
+.PHONY: grpc-codegen
+grpc-codegen:
+	prototool generate ${grpc_dir}
 
 .PHONY: clean
 clean:

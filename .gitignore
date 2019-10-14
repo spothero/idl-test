@@ -1,5 +1,6 @@
-idl/go-out
-
+go-out
+java-out
 gen-go
-
+gen-java
+gen-py
 thrift-out
