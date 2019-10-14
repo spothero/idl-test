@@ -12,8 +12,10 @@ internal class FortuneTellerServer {
   internal fun start() {
     /* The port on which the server should run */
     val port = 50051
+    // This would come from DI in a full implementation
+    val fortuneTellerService = FortuneTellerService()
     server = ServerBuilder.forPort(port)
-      .addService(FortuneTellerAPIImpl())
+      .addService(FortuneTellerAPIImpl(fortuneTellerService))
       .build()
       .start()
 

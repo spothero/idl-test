@@ -5,20 +5,16 @@ import com.grpc.v1.GetFortuneRequest
 import com.grpc.v1.GetFortuneResponse
 import io.grpc.stub.StreamObserver
 
-class FortuneTellerAPIImpl : FortuneTellerAPIGrpc.FortuneTellerAPIImplBase() {
+class FortuneTellerAPIImpl(val fortuneTellerService: FortuneTellerService)
+  : FortuneTellerAPIGrpc.FortuneTellerAPIImplBase()
+{
 
   override fun getFortune(
     request: GetFortuneRequest,
     responseObserver: StreamObserver<GetFortuneResponse>
   ) {
     println("Getting Fortune!")
-    val response = GetFortuneResponse.newBuilder()
-      .setFortune("You're going to die")
-      .setLuckyNumbers(0, 0)
-      .setLuckyNumbers(1, 1)
-      .setLuckyNumbers(2, 2)
-      .setLuckyAnimal(GetFortuneResponse.Animal.ANIMAL_MONKEY)
-      .build()
+    val response = fortuneTellerService.getFortune(request)
     responseObserver.onNext(response)
     responseObserver.onCompleted()
   }
