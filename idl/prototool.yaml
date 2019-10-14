@@ -10,11 +10,11 @@ lint:
 #   path: ../../LICENSE
 generate:
   go_options:
-    import_path: github.com/spothero/idl-test/v2/proto
+    import_path: github.com/spothero/idl-test/proto
   plugins:
     - name: go
       type: go
       flags: plugins=grpc
-      output: ../go/v2/pkg
+      output: ../go/pkg
     - name: java
       output: ./java-out
