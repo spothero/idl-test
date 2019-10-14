@@ -1,5 +1,5 @@
 java_out_dir = java-out gen-java
-grpc_dir = grpc
+grpc_dir = grpcv1
 thrift_dir = thrift
 go_out_dir = go-out gen-go
 py_out_dir = gen-py
