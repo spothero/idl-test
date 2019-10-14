@@ -1,7 +1,9 @@
-java_out_dir = java-out
+java_out_dir = java-out gen-java
 grpc_dir = grpc
-go_out_dir = go-out
-out_dirs = ${java_out_dir} ${go_out_dir}
+thrift_dir = thrift
+go_out_dir = go-out gen-go
+py_out_dir = gen-py
+out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
 
 .PHONY: all
 all: codegen
@@ -17,7 +19,9 @@ codegen: check grpc-codegen thrift-codegen
 
 .PHONY: thrift-codegen
 thrift-codegen:
-	@echo 'TODO: thrift-codegen'
+	thrift --gen py ${thrift_dir}/*
+	thrift --gen java ${thrift_dir}/*
+	thrift --gen go ${thrift_dir}/*
 
 .PHONY: grpc-codegen
 grpc-codegen:
