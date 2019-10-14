@@ -1,4 +1,4 @@
-module github.com/spothero/idl-test/go/v2
+module github.com/spothero/idl-test
 
 go 1.13
 
