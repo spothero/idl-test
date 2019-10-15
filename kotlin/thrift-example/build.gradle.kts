@@ -1,4 +1,5 @@
 plugins {
+    kotlin("jvm").version("1.3.50")
     java
 }
 
@@ -11,8 +12,10 @@ allprojects {
 }
 
 subprojects {
+    apply(plugin = "kotlin")
     apply(plugin = "java")
     dependencies {
+        compile(kotlin("stdlib"))
         compile("org.apache.thrift", "libthrift", "0.12.0")
     }
 }
