@@ -1,7 +1,7 @@
 java_out_dir = java-out gen-java
 grpc_dir = grpcv1
 thrift_dir = thrift
-go_out_dir = ../pkg
+go_out_dir = ../go/pkg
 py_out_dir = gen-py
 out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
 
