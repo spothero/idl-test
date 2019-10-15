@@ -24,8 +24,5 @@ func NewCLICmd() *cobra.Command {
 }
 
 func Run() {
-	fmt.Println("hello, grpc")
-	var test grpcv1.GetFortuneResponse_Animal
-	test = 1
-	fmt.Printf("%v\n", test)
+	fmt.Println("grpc client is unimplemented")
 }

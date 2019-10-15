@@ -33,7 +33,7 @@ func Run() {
 }
 
 func runServer() error {
-	fmt.Printf("starting thrift server at localhost:9090")
+	fmt.Printf("starting thrift server at localhost:9090\n")
 	transport, err := thrift.NewTServerSocket("localhost:9090")
 	if err != nil {
 		return xerrors.Errorf("failed to open server socket: %w", err)
