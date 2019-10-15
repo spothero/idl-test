@@ -16,7 +16,6 @@ func NewCLICmd() *cobra.Command {
 			Run()
 		},
 	}
-	// Server Config
 	flags := cmd.Flags()
 	serverURL := ""
 	flags.StringVar(&serverURL, "grpc-server-url", "localhost:9111", "GRPC Server URL")

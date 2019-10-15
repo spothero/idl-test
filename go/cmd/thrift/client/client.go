@@ -15,7 +15,6 @@ func NewCLICmd() *cobra.Command {
 			Run()
 		},
 	}
-	// Server Config
 	flags := cmd.Flags()
 	serverURL := ""
 	flags.StringVar(&serverURL, "thrift-server-url", "localhost:9090", "Thrift Server URL")
