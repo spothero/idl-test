@@ -1,3 +1,7 @@
+run-server: ## Runs the server
+	./gradlew server:run
+.PHONY: run-server
+
 help: ## Prints this help command
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) |\
 		sort | \
