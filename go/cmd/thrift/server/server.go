@@ -1,15 +1,32 @@
-package main
+package thrift
 
 import (
 	"context"
 	"fmt"
 
 	"github.com/apache/thrift/lib/go/thrift"
+	"github.com/spf13/cobra"
 	"github.com/spothero/idl-test/pkg/fortune"
 	"golang.org/x/xerrors"
 )
 
-func main() {
+func NewCLICmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "thrift-server",
+		Short: "Starts a Thrift Server",
+		Long:  "Starts a Thrift Server",
+		Run: func(cmd *cobra.Command, args []string) {
+			Run()
+		},
+	}
+	// Server Config
+	flags := cmd.Flags()
+	serverURL := ""
+	flags.StringVar(&serverURL, "thrift-server-url", "localhost:9090", "Thrift Server URL")
+	return cmd
+}
+
+func Run() {
 	if err := runServer(); err != nil {
 		panic(err)
 	}

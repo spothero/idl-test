@@ -6,5 +6,4 @@ gen-py
 thrift-out
 go/pkg/fortune
 go/pkg/grpcv1
-go/grpc
-go/thrift
+go/idl-cli
