@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm").version("1.3.50")
     java
+    idea // IntelliJ Plugin
 }
 
 version = "1.0-SNAPSHOT"
