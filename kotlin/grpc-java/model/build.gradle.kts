@@ -3,6 +3,7 @@ import com.google.protobuf.gradle.*
 plugins {
   java
   id("com.google.protobuf").version("0.8.8")
+  idea
 }
 
 repositories {
@@ -24,20 +25,6 @@ dependencies {
   implementation(platform("com.google.protobuf:protobuf-bom:3.10.0"))
   implementation("com.google.protobuf", "protobuf-java")
   implementation("javax.annotation", "javax.annotation-api", "1.3.2")
-}
-
-/*
- This block isn't needed for CLI compilation, but IntelliJ won't recognize the
- generated files without it
-*/
-sourceSets {
-  main {
-    java {
-      srcDirs(
-        "build/generated/source/proto/main/grpc", "build/generated/source/proto/main/java"
-      )
-    }
-  }
 }
 
 protobuf {
