@@ -1,5 +1,6 @@
 rootProject.name = "thrift-example"
 
 include(
-    ":model"
+    ":model",
+    ":server"
 )
