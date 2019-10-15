@@ -11,29 +11,29 @@ import (
 )
 
 func NewCLICmd() *cobra.Command {
+	serverURL := ""
 	cmd := &cobra.Command{
 		Use:   "thrift-server",
 		Short: "Starts a Thrift Server",
 		Long:  "Starts a Thrift Server",
 		Run: func(cmd *cobra.Command, args []string) {
-			Run()
+			Run(serverURL)
 		},
 	}
 	flags := cmd.Flags()
-	serverURL := ""
 	flags.StringVar(&serverURL, "thrift-server-url", "localhost:9090", "Thrift Server URL")
 	return cmd
 }
 
-func Run() {
-	if err := runServer(); err != nil {
+func Run(serverURL string) {
+	if err := runServer(serverURL); err != nil {
 		panic(err)
 	}
 }
 
-func runServer() error {
-	fmt.Printf("starting thrift server at localhost:9090\n")
-	transport, err := thrift.NewTServerSocket("localhost:9090")
+func runServer(serverURL string) error {
+	fmt.Printf("starting thrift server at `%s`\n", serverURL)
+	transport, err := thrift.NewTServerSocket(serverURL)
 	if err != nil {
 		return xerrors.Errorf("failed to open server socket: %w", err)
 	}
