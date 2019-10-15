@@ -43,7 +43,7 @@ struct Car {
 struct FortuneResponse {
   1: string fortune,
   2: list<i32> lucky_numbers,
-  3: Animal luckY_animal,
+  3: Animal lucky_animal,
 }
 
 // Enumerated types are always set to int constants, as in C
