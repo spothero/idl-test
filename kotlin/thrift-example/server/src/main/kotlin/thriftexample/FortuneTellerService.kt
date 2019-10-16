@@ -37,4 +37,3 @@ class FortuneTellerService : FortuneTeller.Iface {
         }
     }
 }
-
