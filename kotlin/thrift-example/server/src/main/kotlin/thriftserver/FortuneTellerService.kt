@@ -1,4 +1,4 @@
-package thriftexample
+package thriftserver
 
 import fortune.Animal
 import fortune.FortuneRequest
