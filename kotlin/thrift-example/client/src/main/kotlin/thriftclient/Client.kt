@@ -48,7 +48,7 @@ object Client {
         private fun createVehicleDescription(): VehicleDescription {
             val vehDesc = VehicleDescription()
             vehDesc.car_nickname = "Trabi"
-            return vehDesc;
+            return vehDesc
         }
 
         fun create(): FortuneRequest {
@@ -69,4 +69,3 @@ object Client {
         }
     }
 }
-

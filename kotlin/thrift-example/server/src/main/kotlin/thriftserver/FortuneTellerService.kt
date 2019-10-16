@@ -15,7 +15,7 @@ class FortuneTellerService : FortuneTeller.Iface {
         fun buildResponse(request: FortuneRequest): FortuneResponse {
             val response = FortuneResponse()
             response.fortune = getFortune(request)
-            response.lucky_numbers = request.finger_lengths.filter { it % 2 == 0}
+            response.lucky_numbers = request.finger_lengths.filter { it % 2 == 0 }
 
             val random = Random.Default
             val luckyAnimalIndex = random.nextInt(0, Animal.values().size - 1)
