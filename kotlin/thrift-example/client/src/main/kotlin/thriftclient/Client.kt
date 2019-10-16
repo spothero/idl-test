@@ -16,15 +16,14 @@ object Client {
     @JvmStatic
     fun main(_args: Array<String>) {
         try {
-            val transport = TSocket("localhost", 9090)
-            transport.open()
+            TSocket("localhost", 9090).use {
+                it.open()
 
-            val protocol = TBinaryProtocol(transport)
-            val client = FortuneTeller.Client(protocol)
+                val protocol = TBinaryProtocol(it)
+                val client = FortuneTeller.Client(protocol)
 
-            perform(client)
-
-            transport.close()
+                perform(client)
+            }
         } catch (x: TException) {
             x.printStackTrace()
         }
