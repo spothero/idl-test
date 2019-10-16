@@ -3,7 +3,7 @@ plugins {
 }
 
 application {
-    mainClassName = "thriftexample.Server"
+    mainClassName = "thriftserver.Server"
 }
 
 dependencies {

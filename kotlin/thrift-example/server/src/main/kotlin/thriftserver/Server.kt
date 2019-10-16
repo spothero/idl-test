@@ -1,4 +1,4 @@
-package thriftexample
+package thriftserver
 
 import fortune.FortuneTeller
 import org.apache.thrift.server.TServer
