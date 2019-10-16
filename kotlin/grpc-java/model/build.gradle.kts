@@ -17,12 +17,13 @@ sourceSets{
 }
 
 dependencies {
-  implementation("io.grpc", "grpc-netty-shaded", "1.24.0")
-  implementation("io.grpc", "grpc-protobuf", "1.24.0")
-  implementation("io.grpc", "grpc-stub", "1.24.0")
-  implementation(platform("com.google.protobuf:protobuf-bom:3.10.0"))
+  implementation("io.grpc", "grpc-netty-shaded")
+  implementation("io.grpc", "grpc-protobuf")
+  implementation("io.grpc", "grpc-stub")
+
+  implementation(platform("com.google.protobuf:protobuf-bom"))
   implementation("com.google.protobuf", "protobuf-java")
-  implementation("javax.annotation", "javax.annotation-api", "1.3.2")
+  implementation("javax.annotation", "javax.annotation-api")
 }
 
 protobuf {
