@@ -30,7 +30,6 @@ object Server {
             server.serve()
         } catch (e: Exception) {
             e.printStackTrace()
-
         }
     }
 
