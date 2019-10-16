@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/status"
 
 	"github.com/spothero/idl-test/pkg/grpcv1"
 )
@@ -54,7 +55,12 @@ func Run(serverURL string) {
 
 	response, err := client.GetFortune(context.Background(), &request)
 	if err != nil {
-		panic(err)
+		_status, isServiceErr := status.FromError(err)
+		if isServiceErr {
+			fmt.Printf("Service error: code=%v details=%v\n", _status.Code(), _status.Message())
+		} else {
+			panic(err)
+		}
 	}
 
 	fmt.Printf("Received response: %v\n", response)

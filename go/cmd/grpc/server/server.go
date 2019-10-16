@@ -3,11 +3,14 @@ package server
 import (
 	"context"
 	"fmt"
+	"math"
 	"net"
 
 	"github.com/spf13/cobra"
-	"github.com/spothero/idl-test/pkg/grpcv1"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/status"
+
+	"github.com/spothero/idl-test/pkg/grpcv1"
 )
 
 func NewCLICmd() *cobra.Command {
@@ -33,6 +36,10 @@ func (f fortuneTellerAPIImpl) GetFortune(
 
 	fmt.Printf("Received request: %v\n", *request)
 
+	if maxLen, err := max(request.FingerLengths); err == nil && maxLen >= 100 {
+		return nil, status.Errorf(420, "Finger is too long")
+	}
+
 	response := grpcv1.GetFortuneResponse{
 		Fortune:      "A flute with no holes is not a flute and a donut with no holes is a Danish",
 		LuckyNumbers: []int32{420, 666},
@@ -57,4 +64,20 @@ func Run(listenAddress *string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func max(nums []int32) (int32, error) {
+	cur := int32(math.MinInt32)
+
+	if len(nums) == 0 {
+		return 0, fmt.Errorf("Empty slice provided to max")
+	}
+
+	for _, num := range nums {
+		if num > cur {
+			cur = num
+		}
+	}
+
+	return cur, nil
 }
