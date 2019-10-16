@@ -4,11 +4,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.spothero.java").version("0.5.1")
-    // Helps IntelliJ understand where to find annotation processors
-    id("net.ltgt.apt-idea").version("0.19")
-
     kotlin("jvm").version("1.3.41")
-    kotlin("kapt").version("1.3.41")
+    java
+    idea
 }
 
 spothero {
@@ -34,6 +32,8 @@ allprojects {
 subprojects {
     apply<KotlinPlatformJvmPlugin>()
     apply<SpotHeroJavaPlugin>()
+    apply(plugin = "java")
+    apply(plugin = "idea")
 
     // Dependencies ///////////////////////////////////////////////////////////
 

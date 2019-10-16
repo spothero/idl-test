@@ -1,9 +1,7 @@
 import com.google.protobuf.gradle.*
 
 plugins {
-  java
   id("com.google.protobuf").version("0.8.8")
-  idea
 }
 
 repositories {
