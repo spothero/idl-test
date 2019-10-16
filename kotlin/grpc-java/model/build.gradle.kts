@@ -9,7 +9,7 @@ repositories {
 }
 
 sourceSets{
-  create("sample"){
+  main {
     proto {
       srcDir("src/main/proto")
     }
