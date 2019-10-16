@@ -17,7 +17,12 @@ subprojects {
     apply(plugin = "java")
     dependencies {
         compile(kotlin("stdlib"))
-        compile("org.apache.thrift", "libthrift", "0.12.0")
+        compile("org.apache.thrift:libthrift:0.12.0")
+
+        // Used for logging
+        compile("org.jetbrains.kotlin:kotlin-reflect")
+        compile("ch.qos.logback:logback-core:1.2.3")
+        compile("ch.qos.logback:logback-classic:1.2.3")
     }
 }
 

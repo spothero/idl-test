@@ -4,8 +4,12 @@ import fortune.FortuneTeller
 import org.apache.thrift.server.TServer
 import org.apache.thrift.server.TSimpleServer
 import org.apache.thrift.transport.TServerSocket
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Server {
+    private val logger: Logger = LoggerFactory.getLogger("ServerLogger")
+
     @JvmStatic
     fun main(_args: Array<String>) {
         try {
@@ -22,7 +26,7 @@ object Server {
         try {
             val serverTransport = TServerSocket(9090)
             val server = TSimpleServer(TServer.Args(serverTransport).processor(processor))
-            println("Starting a simple server...")
+            logger.info("Starting server...")
             server.serve()
         } catch (e: Exception) {
             e.printStackTrace()

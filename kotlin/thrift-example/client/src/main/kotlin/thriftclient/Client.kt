@@ -7,8 +7,12 @@ import fortune.VehicleDescription
 import org.apache.thrift.TException
 import org.apache.thrift.protocol.TBinaryProtocol
 import org.apache.thrift.transport.TSocket
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Client {
+    private val logger: Logger = LoggerFactory.getLogger("ServerLogger")
+
     @JvmStatic
     fun main(_args: Array<String>) {
         try {
@@ -27,10 +31,10 @@ object Client {
     }
 
     fun perform(client: FortuneTeller.Client) {
-        println("From client...")
+        logger.info("From client...")
         val response = client.GetFortune(RequestFactory.create())
-        println("The response is:")
-        println(response)
+        logger.info("The response is:")
+        logger.info(response.toString())
     }
 
     object RequestFactory {
