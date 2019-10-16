@@ -1,14 +1,49 @@
 package thriftexample
 
-import fortune.*
+import fortune.Car
+import fortune.FortuneRequest
+import fortune.FortuneTeller
+import fortune.VehicleDescription
+import org.apache.thrift.server.TServer
+import org.apache.thrift.server.TSimpleServer
+import org.apache.thrift.transport.TServerSocket
 
-fun main(args: Array<String>) {
-    val service = FortuneTellerService()
+object Server {
+    @JvmStatic
+    fun main(_args: Array<String>) {
+        try {
+            val service = FortuneTellerService()
+            val processor = FortuneTeller.Processor(service)
+            val simple = Runnable { runServer(processor) }
+            Thread(simple).start()
+        } catch (x: Exception) {
+            x.printStackTrace()
+        }
+    }
 
-    val request = RequestFactory.create()
-    val response = service.GetFortune(request)
+    private fun runServer(processor: FortuneTeller.Processor<FortuneTellerService>) {
+        try {
+            val serverTransport = TServerSocket(9090)
+            val server = TSimpleServer(TServer.Args(serverTransport).processor(processor))
+            println("Starting a simple server...")
+            server.serve()
+        } catch (e: Exception) {
+            e.printStackTrace()
 
-    println(response)
+        }
+    }
+
+    /*
+    // Left this in here for now to bypass the thrift server logic
+    fun consoleMain(_args: Array<String>) {
+        val service = FortuneTellerService()
+
+        val request = RequestFactory.create()
+        val response = service.GetFortune(request)
+
+        println(response)
+    }
+    */
 }
 
 // Will likely live in the Client
