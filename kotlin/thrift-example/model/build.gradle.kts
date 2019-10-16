@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    compile(files("../lib/javax.annotation-3.1.2.2.jar"))
+    implementation("javax.annotation", "javax.annotation-api", "1.3.2")
 }
