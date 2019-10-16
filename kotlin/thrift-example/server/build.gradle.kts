@@ -7,6 +7,6 @@ application {
 }
 
 dependencies {
-    compile(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
     implementation(project(":model"))
 }

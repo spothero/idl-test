@@ -18,13 +18,13 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     dependencies {
-        compile(kotlin("stdlib"))
-        compile("org.apache.thrift:libthrift:0.12.0")
+        implementation(kotlin("stdlib"))
+        implementation("org.apache.thrift:libthrift:0.12.0")
 
         // Used for logging
-        compile("org.jetbrains.kotlin:kotlin-reflect")
-        compile("ch.qos.logback:logback-core:1.2.3")
-        compile("ch.qos.logback:logback-classic:1.2.3")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("ch.qos.logback:logback-core:1.2.3")
+        implementation("ch.qos.logback:logback-classic:1.2.3")
     }
 }
 
