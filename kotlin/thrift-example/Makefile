@@ -6,6 +6,10 @@ run-client: ## Runs the client
 	./gradlew client:run
 .PHONY: run-client
 
+build-model: ## Builds the thrit generated model
+	./gradlew model:build
+.PHONY: build-model
+
 help: ## Prints this help command
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) |\
 		sort | \

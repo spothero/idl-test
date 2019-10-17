@@ -514,7 +514,7 @@ public class FortuneResponse implements org.apache.thrift.TBase<FortuneResponse,
             break;
           case 3: // LUCKY_ANIMAL
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.lucky_animal = Animal.findByValue(iprot.readI32());
+              struct.lucky_animal = fortune.Animal.findByValue(iprot.readI32());
               struct.setLucky_animalIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -624,7 +624,7 @@ public class FortuneResponse implements org.apache.thrift.TBase<FortuneResponse,
         struct.setLucky_numbersIsSet(true);
       }
       if (incoming.get(2)) {
-        struct.lucky_animal = Animal.findByValue(iprot.readI32());
+        struct.lucky_animal = fortune.Animal.findByValue(iprot.readI32());
         struct.setLucky_animalIsSet(true);
       }
     }
