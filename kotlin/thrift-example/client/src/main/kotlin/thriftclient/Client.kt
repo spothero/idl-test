@@ -3,7 +3,9 @@ package thriftclient
 import fortune.Car
 import fortune.FortuneRequest
 import fortune.FortuneTeller
+import fortune.UnfortunateException
 import fortune.VehicleDescription
+import kotlin.random.Random
 import org.apache.thrift.TException
 import org.apache.thrift.protocol.TBinaryProtocol
 import org.apache.thrift.transport.TSocket
@@ -31,9 +33,14 @@ object Client {
 
     fun perform(client: FortuneTeller.Client) {
         logger.info("From client...")
-        val response = client.GetFortune(RequestFactory.create())
-        logger.info("The response is:")
-        logger.info(response.toString())
+        try {
+            val response = client.GetFortune(RequestFactory.create())
+            logger.info("The response is:")
+            logger.info(response.toString())
+        } catch (_ex: UnfortunateException) {
+            logger.error(
+                "Sorry, UnfortunateException was thrown by the remote service")
+        }
     }
 
     object RequestFactory {
@@ -51,14 +58,21 @@ object Client {
             return vehDesc
         }
 
+        private fun createFingerLengths(upTo: Int): List<Int> {
+            val random = Random.Default
+            return 1.rangeTo(upTo).toList().map {
+                random.nextInt(1, upTo + 1)
+            }
+        }
+
         fun create(): FortuneRequest {
             val request = FortuneRequest()
 
             request.name = "my fortune request"
             request.optional_car = createCar()
             request.vehicle_description = createVehicleDescription()
+            request.finger_lengths = createFingerLengths(10)
 
-            request.finger_lengths = (1..6).toList()
             request.sibling_ages = hashMapOf(
                     "Paul" to 24,
                     "Amy" to 22,
