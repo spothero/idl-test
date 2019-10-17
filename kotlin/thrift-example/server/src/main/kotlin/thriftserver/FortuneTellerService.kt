@@ -10,7 +10,6 @@ class FortuneTellerService : FortuneTeller.Iface {
 
     object ResponseBuilder {
         fun buildResponse(request: FortuneRequest): FortuneResponse {
-            println(request.finger_lengths)
             if (request.finger_lengths.sum() > 50) {
                 throw UnfortunateException()
             }
