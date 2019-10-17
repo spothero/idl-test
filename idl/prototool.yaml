@@ -15,6 +15,11 @@ generate:
     - name: go
       type: go
       flags: plugins=grpc
-      output: ../go/pkg
+      output: ./gen-go-grpc
     - name: java
       output: ./java-out
+    - name: grpc_python
+      output: ./gen-py-grpc
+      path: /usr/bin/grpc_python_plugin
+    - name: python
+      output: ./gen-py-grpc

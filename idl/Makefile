@@ -4,18 +4,14 @@ thrift_dir = thrift
 go_out_dir = ../go/pkg
 py_out_dir = gen-py
 out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
+pwd = $(shell pwd)
+uid_gid = $(shell stat -c "%u:%g" ${pwd})
 
 .PHONY: all
 all: codegen
 
-.PHONY: check
-check:
-	@which prototool > /dev/null
-	@which protoc-gen-go > /dev/null
-	@echo 'All deps OK.'
-
 .PHONY: codegen
-codegen: check grpc-codegen thrift-codegen
+codegen: grpc-codegen thrift-codegen
 
 .PHONY: thrift-codegen
 thrift-codegen:
@@ -25,7 +21,7 @@ thrift-codegen:
 
 .PHONY: grpc-codegen
 grpc-codegen:
-	prototool generate ${grpc_dir}
+	docker run -v "${pwd}:/work" -u ${uid_gid} uber/prototool:latest prototool generate
 
 .PHONY: clean
 clean:
