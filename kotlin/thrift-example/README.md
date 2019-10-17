@@ -22,5 +22,5 @@ The app is composed of three subprojects:
 
 #### Implementation Challenges
 
-* Had to fix the generated Java file - only 2 places in one file
+* Had to fix the generated Java file - only two places in the generated `FortuneResponse` class file
 * Lack of documentation of information - I've found very few examples in Kotlin
