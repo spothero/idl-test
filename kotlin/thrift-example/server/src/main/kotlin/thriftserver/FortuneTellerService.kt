@@ -1,9 +1,6 @@
 package thriftserver
 
-import fortune.Animal
-import fortune.FortuneRequest
-import fortune.FortuneResponse
-import fortune.FortuneTeller
+import fortune.*
 import kotlin.random.Random
 
 class FortuneTellerService : FortuneTeller.Iface {
@@ -13,6 +10,11 @@ class FortuneTellerService : FortuneTeller.Iface {
 
     object ResponseBuilder {
         fun buildResponse(request: FortuneRequest): FortuneResponse {
+            println(request.finger_lengths)
+            if (request.finger_lengths.sum() > 50) {
+                throw UnfortunateException()
+            }
+
             val response = FortuneResponse()
             response.fortune = getFortune(request)
             response.lucky_numbers = request.finger_lengths.filter { it % 2 == 0 }

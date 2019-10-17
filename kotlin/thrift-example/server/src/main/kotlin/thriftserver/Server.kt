@@ -1,11 +1,15 @@
 package thriftserver
 
+import fortune.Car
+import fortune.FortuneRequest
 import fortune.FortuneTeller
+import fortune.VehicleDescription
 import org.apache.thrift.server.TServer
 import org.apache.thrift.server.TSimpleServer
 import org.apache.thrift.transport.TServerSocket
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import kotlin.random.Random
 
 object Server {
     private val logger: Logger = LoggerFactory.getLogger("ServerLogger")
@@ -36,7 +40,8 @@ object Server {
     /*
     // Left this in here for now
     // Example to bypass the thrift server logic
-    fun consoleMain(_args: Array<String>) {
+    @JvmStatic
+    fun main(_args: Array<String>) {
         val service = FortuneTellerService()
 
         val request = RequestFactory.create()
