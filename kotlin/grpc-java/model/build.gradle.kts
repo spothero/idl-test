@@ -1,7 +1,6 @@
 import com.google.protobuf.gradle.*
 
 plugins {
-  java
   id("com.google.protobuf").version("0.8.8")
 }
 
@@ -10,7 +9,7 @@ repositories {
 }
 
 sourceSets{
-  create("sample"){
+  main {
     proto {
       srcDir("src/main/proto")
     }
@@ -18,26 +17,13 @@ sourceSets{
 }
 
 dependencies {
-  implementation("io.grpc", "grpc-netty-shaded", "1.24.0")
-  implementation("io.grpc", "grpc-protobuf", "1.24.0")
-  implementation("io.grpc", "grpc-stub", "1.24.0")
-  implementation(platform("com.google.protobuf:protobuf-bom:3.10.0"))
-  implementation("com.google.protobuf", "protobuf-java")
-  implementation("javax.annotation", "javax.annotation-api", "1.3.2")
-}
+  implementation("io.grpc", "grpc-netty-shaded")
+  implementation("io.grpc", "grpc-protobuf")
+  implementation("io.grpc", "grpc-stub")
 
-/*
- This block isn't needed for CLI compilation, but IntelliJ won't recognize the
- generated files without it
-*/
-sourceSets {
-  main {
-    java {
-      srcDirs(
-        "build/generated/source/proto/main/grpc", "build/generated/source/proto/main/java"
-      )
-    }
-  }
+  implementation(platform("com.google.protobuf:protobuf-bom"))
+  implementation("com.google.protobuf", "protobuf-java")
+  implementation("javax.annotation", "javax.annotation-api")
 }
 
 protobuf {

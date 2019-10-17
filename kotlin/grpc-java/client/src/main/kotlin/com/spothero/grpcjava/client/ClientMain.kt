@@ -14,6 +14,12 @@ fun main(args: Array<String>) {
     /* Access a service running on the local machine on port 50051 */
     client.requestFortunesSync()
       .forEach { println("Received fortune:\n$it") }
+
+    client.requestFortunesSyncViaIODispatcher()
+      .forEach { println("Received fortune:\n$it") }
+
+    client.requestFortunesAsync()
+      .forEach { println("Received fortune:\n$it") }
   } finally {
     managedChannel.shutdown().awaitTermination(5, TimeUnit.SECONDS)
   }
