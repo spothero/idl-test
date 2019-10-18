@@ -9,6 +9,10 @@ idl-codegen:
 go:
 	$(MAKE) -C go
 
+.PHONY: py
+py:
+	$(MAKE) -C py
+
 .PHONY: clean
 clean:
 	$(MAKE) -C idl clean
