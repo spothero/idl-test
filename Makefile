@@ -1,5 +1,5 @@
 .PHONY: all
-all: idl-codegen go
+all: idl-codegen go py
 
 .PHONY: idl-codegen
 idl-codegen:
