@@ -55,6 +55,8 @@ subprojects {
             implementation("io.grpc", "grpc-protobuf", grpcVersion)
             implementation("io.grpc", "grpc-stub", grpcVersion)
 
+            implementation("com.github.marcoferrer.krotoplus", "kroto-plus-coroutines", "0.5.0")
+
             implementation(platform("com.google.protobuf:protobuf-bom:3.10.0"))
             implementation("com.google.protobuf", "protobuf-java")
             implementation("javax.annotation", "javax.annotation-api", "1.3.2")

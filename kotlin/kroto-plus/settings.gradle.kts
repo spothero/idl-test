@@ -11,7 +11,9 @@ pluginManagement {
 rootProject.name = "kroto-plus"
 
 include(
-  ":client",
   ":model",
-  ":server"
+  ":client",
+  ":server",
+  ":coroutine-client",
+  ":coroutine-server"
 )
