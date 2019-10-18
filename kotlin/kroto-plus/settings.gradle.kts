@@ -8,7 +8,7 @@ pluginManagement {
   }
 }
 
-rootProject.name = "grpc-java"
+rootProject.name = "kroto-plus"
 
 include(
   ":client",

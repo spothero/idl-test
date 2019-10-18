@@ -1,0 +1,42 @@
+mock_services {
+    filter { include_path: "com/spothero/*" }
+    implement_as_object: true
+    generate_service_list: true
+#    service_list_package: "jojo.bizarre.adventure"
+#    service_list_name: "MockJojoServices"
+}
+proto_builders {
+    filter { exclude_path: "google/*" }
+    unwrap_builders: false
+    use_dsl_markers: true
+}
+grpc_stub_exts {
+    support_coroutines: true
+}
+grpc_coroutines {
+  # even without config, this is necessary to generate coroutine classes
+}
+# generator_scripts {
+#    script_path: "helloThere.kts"
+#    script_bundle: "kp-scripts/build/libs/kp-scripts.jar"
+# }
+insertions {
+    filter {
+        include_path: "jojo/bizarre/adventure/character/*"
+    }
+    entry { point: MESSAGE_IMPLEMENTS
+        script_path: "extendableMessages.kts"
+        script_bundle: "kp-scripts/build/libs/kp-scripts.jar"
+    }
+    entry { point: BUILDER_IMPLEMENTS
+        script_path: "extendableMessages.kts"
+        script_bundle: "kp-scripts/build/libs/kp-scripts.jar"
+    }
+    entry { point: CLASS_SCOPE
+        script_path: "extendableMessages.kts"
+        script_bundle: "kp-scripts/build/libs/kp-scripts.jar"
+    }
+    entry { point: OUTER_CLASS_SCOPE
+        script_path: "kp-scripts/src/main/kotlin/sampleInsertionScript.kts"
+    }
+}
