@@ -47,12 +47,10 @@ https://github.com/spothero/idl-test
 
 ## Tooling setup
 
-* `protoc` - https://github.com/protocolbuffers/protobuf
-* `protoc-gen-go` - `go get github.com/golang/protobuf/protoc-gen-go` -
-  https://developers.google.com/protocol-buffers/docs/reference/go-generated
-* `prototool` - `brew install prototool` - https://github.com/uber/prototool/blob/dev/docs/install.md
+* `docker` - required for [GRPC/PB generation](https://github.com/spothero/idl-test/blob/09b69169c7fc55c3a94f6a232e9ada535806f325/idl/Makefile#L24)
 * `thrift` - https://thrift.apache.org/docs/install/ (`brew install thrift` on MacOS)
 
 ## IDL Overviews and Guides
 
+* [GRPC Error Handling](http://avi.im/grpc-errors/)
 * `thrift` - https://diwakergupta.github.io/thrift-missing-guide/
