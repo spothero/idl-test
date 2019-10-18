@@ -3,7 +3,7 @@ grpc_dir = grpcv1
 thrift_dir = thrift
 go_out_dir = ../go/pkg
 py_out_dir = gen-py
-out_dirs = ${java_out_dir} ${go_out_dir} ${py_out_dir}
+out_dirs = ${java_out_dir} ${go_out_dir}/fortune ${py_out_dir} gen-go gen-go-grpc
 pwd = $(shell pwd)
 uid_gid = $(shell stat -c "%u:%g" ${pwd})
 

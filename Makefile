@@ -6,11 +6,11 @@ idl-codegen:
 	$(MAKE) -C idl
 
 .PHONY: go
-go:
+go: idl-codegen
 	$(MAKE) -C go
 
 .PHONY: py
-py:
+py: idl-codegen
 	$(MAKE) -C py
 
 .PHONY: clean
