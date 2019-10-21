@@ -80,9 +80,9 @@ def run_client(port):
     # And close it...
     transport.close()
 
+
 def run_server(port):
-    print(f'Running server on port {port}')
-    raise NotImplementedError("TODO: Thrift server")
+    raise NotImplementedError("We only wanted to build a server POC for gRPC")
 
 
 def create_request():
