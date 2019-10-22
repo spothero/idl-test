@@ -48,7 +48,8 @@ subprojects {
 
         testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.3.2")
 
-        val grpcVersion = "1.24.0"
+        //Micronaut grpc includes grpc 1.19.0.  The latest 1.24 netty-shaded is not compatible
+        val grpcVersion = "1.19.0"
 
         constraints {
             implementation("io.grpc", "grpc-netty-shaded", grpcVersion)

@@ -15,5 +15,6 @@ include(
   ":client",
   ":server",
   ":coroutine-client",
-  ":coroutine-server"
+  ":coroutine-server",
+  ":micronaut-grpc"
 )

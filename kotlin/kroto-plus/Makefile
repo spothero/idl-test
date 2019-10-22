@@ -10,8 +10,12 @@ run-client:
 run-coroutine-client:
 	./gradlew coroutine-client:run
 
+run-micronaut-server:
+	./gradlew micronaut-grpc:run
+
 .PHONY: \
 	run-server \
 	run-coroutine-server \
 	run-client \
-	run-coroutine-client
+	run-coroutine-client \
+	run-micronaut-server

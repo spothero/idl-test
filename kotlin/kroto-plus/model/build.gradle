@@ -3,7 +3,6 @@ plugins{
 }
 
 dependencies {
-  implementation("io.grpc:grpc-netty-shaded")
   implementation("io.grpc:grpc-protobuf")
   implementation("io.grpc:grpc-stub")
 
