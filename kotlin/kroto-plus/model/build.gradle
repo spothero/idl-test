@@ -1,0 +1,45 @@
+plugins{
+  id 'com.google.protobuf' version '0.8.8'
+}
+
+dependencies {
+  implementation("io.grpc:grpc-protobuf")
+  implementation("io.grpc:grpc-stub")
+
+  api("com.github.marcoferrer.krotoplus:kroto-plus-coroutines")
+
+  implementation(platform("com.google.protobuf:protobuf-bom"))
+  implementation("com.google.protobuf:protobuf-java")
+  implementation("javax.annotation:javax.annotation-api")
+}
+
+protobuf {
+  protoc { artifact = "com.google.protobuf:protoc:3.10.0"}
+
+  plugins {
+    grpc {
+      artifact = "io.grpc:protoc-gen-grpc-java:1.24.0"
+    }
+    kroto {
+      artifact = "com.github.marcoferrer.krotoplus:protoc-gen-kroto-plus:0.5.0:jvm8@jar"
+    }
+  }
+
+  generateProtoTasks {
+    def krotoConfig = file("krotoPlusConfig.asciipb") // Or .json
+
+    all().each{ task ->
+      // Adding the config file to the task inputs lets UP-TO-DATE checks
+      // include changes to configuration
+      task.inputs.files krotoConfig
+
+      task.plugins {
+        grpc { outputSubDir = "grpc" }
+        kroto {
+          outputSubDir = "java"
+          option "ConfigPath=$krotoConfig"
+        }
+      }
+    }
+  }
+}
