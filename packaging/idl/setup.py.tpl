@@ -4,7 +4,6 @@
 ## Template for setup.py for Python packages containing GRPC service stubs.
 ##
 import os
-
 import sys
 
 from setuptools import find_packages, setup
@@ -17,7 +16,6 @@ setup(
     version="{{VERSION}}",
     author="SpotHero",
     url="{{PACKAGE_URL}}",
-    long_description=__doc__,
     packages=find_packages(include=["{{ROOT_PACKAGE_NAME}}*",]),
     install_requires=[
         "grpcio=={}".format(GRPCIO_VERSION),
