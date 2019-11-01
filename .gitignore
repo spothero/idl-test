@@ -1,4 +1,5 @@
 gen-go
+gen-go-grpc
 gen-java
 gen-py
 gen-py-grpc
