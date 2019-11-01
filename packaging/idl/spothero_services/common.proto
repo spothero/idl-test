@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package spothero.common;
+
+message Coordinates {
+    float latitude = 1;
+    float longitude = 2;
+}

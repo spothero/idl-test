@@ -10,6 +10,7 @@ option objc_class_prefix = "GXX";
 option php_namespace = "Weather\\V1";
 
 import "google/protobuf/empty.proto";
+import "spothero_services/common.proto";
 
 service WeatherAPI {
   rpc GetTemperature (google.protobuf.Empty) returns (GetWeatherResponse);
@@ -17,39 +18,5 @@ service WeatherAPI {
 
 message GetWeatherResponse {
   int32 temperature = 1;
+  spothero.common.Coordinates position = 2;
 }
-
-// message GetFortuneRequest {
-//   string name = 1;
-//   message Car {
-//     string make = 1;
-//     string model = 2;
-//     int32 year = 3;
-//   }
-//   // this field may be absent
-//   Car optional_car = 3;
-//   oneof vehicle_description {
-//     string car_nickname = 4;
-//     int32 bike_frame_size_cm = 5;
-//   }
-//
-//   repeated int32 finger_lengths = 6;
-//
-//   map<string, int32> sibling_ages = 7;
-// }
-//
-// message GetFortuneResponse {
-//   enum Animal {
-//     ANIMAL_INVALID = 0;
-//     ANIMAL_MONKEY = 1;
-//     ANIMAL_OWL = 2;
-//     ANIMAL_ANT = 3;
-//     ANIMAL_LIZARD = 4;
-//     ANIMAL_CAT = 5;
-//   }
-//
-//   string fortune = 1;
-//   repeated int32 lucky_numbers = 2;
-//   Animal lucky_animal = 3;
-// }
-//

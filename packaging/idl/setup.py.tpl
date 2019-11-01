@@ -13,8 +13,10 @@ GRPCIO_VERSION = "1.24"
 GRPCIO_TOOLS_VERSION = "1.24"
 
 setup(
-    name="idl-test",
+    name="{{PACKAGE_NAME}}",
     version="{{VERSION}}",
+    author="SpotHero",
+    url="{{PACKAGE_URL}}",
     long_description=__doc__,
     packages=find_packages(include=["{{ROOT_PACKAGE_NAME}}*",]),
     install_requires=[
