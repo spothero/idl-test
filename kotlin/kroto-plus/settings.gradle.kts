@@ -13,8 +13,10 @@ rootProject.name = "kroto-plus"
 include(
   ":model",
   ":client",
+  ":server-core",
   ":server",
   ":coroutine-client",
   ":coroutine-server",
-  ":micronaut-grpc"
+  ":micronaut-grpc",
+  ":drophero"
 )

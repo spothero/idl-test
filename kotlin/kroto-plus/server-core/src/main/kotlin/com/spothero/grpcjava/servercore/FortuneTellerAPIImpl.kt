@@ -1,4 +1,4 @@
-package com.spothero.grpcjava.server
+package com.spothero.grpcjava.servercore
 
 import com.grpc.v1.FortuneTellerAPIGrpc
 import com.grpc.v1.GetFortuneRequest

@@ -20,6 +20,7 @@ dependencies {
 
 
   implementation(project(":model"))
+  implementation(project(":server-core"))
   implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
 
   //Adds support for HTTP on 8080 along with GRPC on 50051

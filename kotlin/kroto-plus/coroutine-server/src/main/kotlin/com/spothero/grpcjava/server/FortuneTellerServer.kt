@@ -1,5 +1,7 @@
 package com.spothero.grpcjava.server
 
+import com.spothero.grpcjava.servercore.FortuneTellerCoroutineAPIImpl
+import com.spothero.grpcjava.servercore.FortuneTellerService
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import java.io.IOException
@@ -15,7 +17,7 @@ internal class FortuneTellerServer {
     // This would come from DI in a full implementation
     val fortuneTellerService = FortuneTellerService()
     server = ServerBuilder.forPort(port)
-      .addService(FortuneTellerAPIImpl(fortuneTellerService))
+      .addService(FortuneTellerCoroutineAPIImpl(fortuneTellerService))
       .build()
       .start()
 

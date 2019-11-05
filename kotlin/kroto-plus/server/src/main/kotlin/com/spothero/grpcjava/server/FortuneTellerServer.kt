@@ -1,5 +1,7 @@
 package com.spothero.grpcjava.server
 
+import com.spothero.grpcjava.servercore.FortuneTellerAPIImpl
+import com.spothero.grpcjava.servercore.FortuneTellerService
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import java.io.IOException
