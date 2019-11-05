@@ -10,7 +10,7 @@ class FortuneTellerService {
   val random = Random.Default
 
   fun getFortuneAsync(getFortuneRequest: GetFortuneRequest): Deferred<GetFortuneResponse> {
-    return GlobalScope.async(Dispatchers.Default) {
+    return GlobalScope.async(Dispatchers.IO) {
       delay(random.nextLong(500, 1000))
       getFortune(getFortuneRequest)
     }
