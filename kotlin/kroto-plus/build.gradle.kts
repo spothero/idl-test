@@ -41,6 +41,7 @@ subprojects {
         // Platform dependencies do not add any dependencies; they just define versions of
         // dependencies that you pull in.
         implementation(kotlin("stdlib-jdk8"))
+        implementation("javax.inject", "javax.inject", "1")
 
         testImplementation("io.mockk", "mockk", "1.9.3")
         testImplementation("org.hamcrest", "hamcrest", "2.1")

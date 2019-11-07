@@ -8,5 +8,6 @@ application {
 
 dependencies {
     implementation(project(":model"))
+    implementation(project(":server-core"))
     implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
 }
