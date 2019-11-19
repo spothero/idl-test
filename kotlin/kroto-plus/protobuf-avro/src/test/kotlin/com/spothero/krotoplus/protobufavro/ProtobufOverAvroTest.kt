@@ -33,34 +33,6 @@ class ProtobufOverAvroTest {
 
     val schemaByDescriptor = ProtobufData.get().getSchema(GetFortuneRequest.getDescriptor())
     assertEquals(schemaByClass, schemaByDescriptor)
-
-    val siblingAgesField = schemaByClass.getField("sibling_ages")
-    println("field: $siblingAgesField")
-    println("schema: ${siblingAgesField.schema()}")
-
-    val siblingAgesSchema = ProtobufData.get()
-      .getSchema(GetFortuneRequest.getDescriptor().findFieldByName("sibling_ages"))
-    println("siblingAgesSchema: $siblingAgesSchema")
-
-    val schemaCacheField = ProtobufData::class.java.getDeclaredField("schemaCache")
-    schemaCacheField.trySetAccessible()
-    val schemaCache = schemaCacheField.get(ProtobufData.get()) as Map<Object, Schema>
-    for (entry in schemaCache.entries) {
-      println("obj: ${entry.key}, schema: ${entry.value.name}")
-    }
-    val schemaCacheSize = schemaCache.size
-    println("Original schemaCache size: $schemaCacheSize")
-
-    for (fieldDescriptor in GetFortuneRequest.getDescriptor().fields) {
-      println("fieldDescriptor: $fieldDescriptor, type: ${fieldDescriptor.type}, isRepeated: ${fieldDescriptor.isRepeated}")
-      if (fieldDescriptor.isMapField) {
-        println("mapField: $fieldDescriptor, messageType: ${fieldDescriptor.messageType.name}")
-        val mapElementSchema = ProtobufData.get().getSchema(fieldDescriptor.messageType)
-        println("mapElementSchema: $mapElementSchema")
-        val newSchemaCacheSize = schemaCache.size
-        println("New schemaCache size: $newSchemaCacheSize")
-      }
-    }
   }
 
   @Test
@@ -107,6 +79,5 @@ class ProtobufOverAvroTest {
     val readGetFortune = datumReader.read(null, binaryDecoder)
     // Source and Read values should be equal
     assertEquals(sourceGetFortune, readGetFortune)
-    println(readGetFortune)
   }
 }
