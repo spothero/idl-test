@@ -1,3 +1,7 @@
 grpc_coroutines {
   # even without config, this is necessary to generate coroutine classes
 }
+proto_builders {
+    # minimum configuration necessary to generate the block builders
+    use_dsl_markers: true
+}

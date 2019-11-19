@@ -64,6 +64,8 @@ subprojects {
             implementation("javax.annotation", "javax.annotation-api", "1.3.2")
 
             implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.1.1")
+
+            implementation("org.apache.avro", "avro-protobuf", "1.9.1")
         }
     }
 
