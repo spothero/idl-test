@@ -18,5 +18,6 @@ include(
   ":coroutine-client",
   ":coroutine-server",
   ":micronaut-grpc",
-  ":drophero"
+  ":drophero",
+  ":protobuf-avro"
 )
