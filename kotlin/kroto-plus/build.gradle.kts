@@ -26,6 +26,11 @@ allprojects {
         maven {
             url = uri(extra["nexusMavenUrl"] as String)
         }
+
+        // Add Confluent's Maven repo for Confluent jars
+        maven {
+            url = uri("https://packages.confluent.io/maven/")
+        }
     }
 }
 
@@ -61,11 +66,15 @@ subprojects {
 
             implementation(platform("com.google.protobuf:protobuf-bom:3.10.0"))
             implementation("com.google.protobuf", "protobuf-java")
+//            implementation("com.google.protobuf", "protobuf-java", "3.6.1")
             implementation("javax.annotation", "javax.annotation-api", "1.3.2")
 
             implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.1.1")
 
             implementation("org.apache.avro", "avro-protobuf", "1.9.1")
+
+            implementation("org.apache.kafka", "kafka-clients", "2.4.0")
+            implementation("io.confluent", "kafka-avro-serializer", "5.3.1")
         }
     }
 
