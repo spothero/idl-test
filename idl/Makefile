@@ -21,7 +21,8 @@ thrift-codegen:
 
 .PHONY: grpc-codegen
 grpc-codegen:
-	docker run -v "${pwd}:/work" -u ${uid_gid} uber/prototool:latest prototool generate
+	# docker run -v "${pwd}:/work" -u ${uid_gid} uber/prototool:latest prototool generate
+	docker run -v "${pwd}:/work" uber/prototool:latest prototool generate
 
 .PHONY: clean
 clean:
