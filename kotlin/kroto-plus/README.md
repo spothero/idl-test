@@ -15,3 +15,9 @@ A Kotlin/Java implementation of the `fortune_teller_api.proto` using the standar
     ```bash
     make run-client
     ```
+
+## Avro
+* ksql
+```
+create stream getfortunes2 with (KAFKA_TOPIC='get-fortune-requests', VALUE_FORMAT='AVRO');
+```
