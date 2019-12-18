@@ -141,6 +141,11 @@ services:
       KSQL_BOOTSTRAP_SERVERS: PLAINTEXT://kafka1:19092
       KSQL_LISTENERS: http://0.0.0.0:8088/
       KSQL_KSQL_SERVICE_ID: ksql-server_
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://kafka-schema-registry:8081
+#      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: localhost:32181
+#      SCHEMA_REGISTRY_HOST_NAME: localhost
+#      SCHEMA_REGISTRY_LISTENERS: http://localhost:8081
+#      SCHEMA_REGISTRY_DEBUG: "true"
     depends_on:
       - zoo1
       - kafka1

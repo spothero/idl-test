@@ -3,9 +3,7 @@ package com.spothero.krotoplus.protobufavro
 import com.grpc.v1.GetFortuneRequest
 import com.grpc.v1.GrpcProtoBuilders
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient
-import io.confluent.kafka.serializers.AvroSchemaUtils
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig
-import io.confluent.kafka.serializers.KafkaAvroSerializer
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig
 import org.apache.avro.Schema
 import org.apache.avro.io.DecoderFactory
@@ -24,14 +22,15 @@ import org.apache.kafka.common.serialization.LongSerializer
 import org.apache.kafka.common.serialization.Serializer
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayOutputStream
+import java.nio.ByteBuffer
 import java.time.Duration
 import java.time.temporal.ChronoUnit
-import java.time.temporal.TemporalUnit
 import java.util.concurrent.TimeUnit
 
 val logger = LoggerFactory.getLogger(object{}.javaClass)
 const val GET_FORTUNE_REQUESTS_TOPIC = "get-fortune-requests"
 const val SCHEMA_REGISTRY_URL = "http://localhost:8081"
+const val GET_FORTUNE_REQUESTS_VALUE_SUBJECT = "get-fortune-requests-value"
 val bootstrapServers = "bootstrap.servers" to "localhost:9092"
 val kafkaAdminClient = AdminClient.create(mapOf(bootstrapServers))
 val getFortuneRequestProducer = KafkaProducer<Long, GetFortuneRequest>(mapOf(
@@ -49,6 +48,7 @@ val getFortuneRequestConsumer = KafkaConsumer<Long, GetFortuneRequest>(mapOf(
   ConsumerConfig.GROUP_ID_CONFIG to "sample-kotlin-consumer"
 ))
 val getFortuneRequestSchema = createGetFortuneRequestSchema()
+val schemaRegistryClient = CachedSchemaRegistryClient(SCHEMA_REGISTRY_URL, 100)
 
 val getFortuneRequest = GrpcProtoBuilders.GetFortuneRequest {
   name = "Request1"
@@ -82,8 +82,7 @@ fun createGetFortuneRequestsTopic() {
 }
 
 fun registerGetFortuneRequestSchema() {
-  val schemaRegistryClient = CachedSchemaRegistryClient(SCHEMA_REGISTRY_URL, 100)
-  schemaRegistryClient.register("GetFortuneRequest", getFortuneRequestSchema)
+  schemaRegistryClient.register(GET_FORTUNE_REQUESTS_VALUE_SUBJECT, getFortuneRequestSchema)
 }
 
 fun subscribeConsumer() {
@@ -108,6 +107,14 @@ fun publishGetFortuneRequest() {
 
 fun consumeGetFortuneRequest() {
   logger.info("Consuming getFortuneRequest...")
+  var consumeCount = 0
+  while (consumeCount == 0) {
+    consumeCount = consumeRecordsInt()
+    logger.info("Consumed $consumeCount records")
+  }
+}
+
+private fun consumeRecordsInt(): Int {
   val records = getFortuneRequestConsumer.poll(Duration.of(10, ChronoUnit.SECONDS))
   records.forEach {
     logger.info("Consumed $it")
@@ -115,15 +122,22 @@ fun consumeGetFortuneRequest() {
       "Consumed message not equivalent to input!"
     }
   }
+  return records.count()
 }
 
 class GetFortuneRequestAvroSerializer : Serializer<GetFortuneRequest> {
 
-  private val datumWriter = ProtobufData.get().createDatumWriter(createGetFortuneRequestSchema())
+  private val getFortuneRequestSchema = createGetFortuneRequestSchema()
+  private val datumWriter = ProtobufData.get().createDatumWriter(getFortuneRequestSchema)
 
   override fun serialize(topic: String, data: GetFortuneRequest): ByteArray {
     val outputStream = ByteArrayOutputStream(1024)
     val binaryEncoder = EncoderFactory.get().binaryEncoder(outputStream, null)
+
+//    outputStream.write(0)
+//    val schemaId = schemaRegistryClient.getId(GET_FORTUNE_REQUESTS_VALUE_SUBJECT, getFortuneRequestSchema)
+//    outputStream.write(ByteBuffer.allocate(4).putInt(schemaId).array())
+
     datumWriter.write(data, binaryEncoder)
     binaryEncoder.flush()
     outputStream.flush()
@@ -137,6 +151,17 @@ class GetFortuneRequestAvroDeserializer : Deserializer<GetFortuneRequest> {
   private val datumReader = ProtobufData.get().createDatumReader(createGetFortuneRequestSchema())
 
   override fun deserialize(topic: String, data: ByteArray): GetFortuneRequest {
+//    val buffer = ByteBuffer.wrap(data)
+//    val magicNumber = buffer.get()
+//    logger.info("magicNumber=$magicNumber")
+//    val id = buffer.int
+//    logger.info("schemaId=$id")
+//
+//    val length = buffer.limit() - 1 - 4
+//    val start = buffer.position() + buffer.arrayOffset()
+//    val binaryDecoder = DecoderFactory.get().binaryDecoder(buffer.array(), start, length, null)
+//    return datumReader.read(null, binaryDecoder) as GetFortuneRequest
+
     val binaryDecoder = DecoderFactory.get().binaryDecoder(data, null)
     return datumReader.read(null, binaryDecoder) as GetFortuneRequest
   }
